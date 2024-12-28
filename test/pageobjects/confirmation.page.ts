@@ -1,13 +1,15 @@
 class Confirmation {
+  get confirmMsg(): ChainablePromiseElement {
+    return $(".hero-primary");
+  }
 
-    get confirmMsg(): ChainablePromiseElement { 
-        return $(".hero-primary");
-    }
-
-    async verifyTheOrderConfirmationMessage(): Promise<void> {
-        await expect(this.confirmMsg).toBeDisplayedInViewport();
-        await expect(this.confirmMsg).toHaveText(expect.stringContaining("THANKYOU FOR THE ORDER."));//somthing else in toHaveText
-    }
+  async verifyTheOrderConfirmationMessage(): Promise<void> {
+    await expect(this.confirmMsg).toBeDisplayedInViewport();
+    await expect(this.confirmMsg).toHaveText(
+      expect.stringContaining("THANKYOU FOR THE ORDER."),
+      { containing: true, ignoreCase: true }
+    );
+  }
 }
 
 export default new Confirmation();

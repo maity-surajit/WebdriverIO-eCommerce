@@ -2,7 +2,6 @@ import { $ } from '@wdio/globals'
 import Page from './page';
 
 class LoginPage extends Page {
-    //define all getter method return type
     get inputUsername(): ChainablePromiseElement {
         return $('#userEmail');
     }
