@@ -33,7 +33,7 @@ class Checkout {
     );
     const countryName: ChainablePromiseElement | undefined =
       await countriesList.find(async (country: ChainablePromiseElement) => {
-        return (await country.getText()) === name;
+        return await country.getText().includes(name);
       });
     await countryName.waitForDisplayed();
     await countryName.click();
