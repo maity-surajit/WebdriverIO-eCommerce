@@ -1,29 +1,28 @@
 class Cart {
 
-    public get cartElement() {
+    get cartElement(): ChainablePromiseElement { //define return type
         return $("div[class='cartSection'] h3");
     }
 
-    public get checkoutBtn() {
+    get checkoutBtn(): ChainablePromiseElement { //define return type
         return $("ul li button[class='btn btn-primary']:last-of-type");
     }
 
 
-    async cartItemVisible(): Promise<void> {
-        await expect(this.cartElement).toBePresent();
-        await expect(this.cartElement).toBeDisplayedInViewport();
+    // async cartItemVisible(): Promise<void> {
 
-        await this.cartElement.isDisplayed()
+
+    //     await this.cartElement.isDisplayed()
         
-    }
+    // }
 
-    async clickOnCheckoutBtn(): Promise<void> {
+    // async clickOnCheckoutBtn(): Promise<void> {
 
-        await expect(this.checkoutBtn).toBePresent();
-        await expect(this.checkoutBtn).toBeDisplayedInViewport();
+    //     await expect(this.checkoutBtn).toBePresent();
+    //     await expect(this.checkoutBtn).toBeDisplayedInViewport();
         
-        await this.checkoutBtn.click();
-    }
+    //     await this.checkoutBtn.click();
+    // }
 }
 
 

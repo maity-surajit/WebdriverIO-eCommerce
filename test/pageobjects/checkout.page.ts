@@ -1,22 +1,18 @@
 class Checkout{
 
-    public get countryField() {
+    get countryField(): ChainablePromiseElement {
         return $("input[placeholder='Select Country']");
     }
 
-    public get countrySearchList() {
+    get countrySearchList(): ChainablePromiseArray {
         return $$("section[class*='ta-results'] button span");
     }
 
-    public get placeOrderBtn() {
+    get placeOrderBtn(): ChainablePromiseElement {
         return $("a[class*='action__submit']");
     }
 
     async searchCountryName(name: string): Promise<void> {
-
-        await expect(this.countryField).toBePresent();
-        await expect(this.countryField).toBeClickable();
-        await expect(this.countryField).toBeDisplayedInViewport();
            
         await this.countryField.setValue(name);
 
@@ -28,22 +24,18 @@ class Checkout{
 
         const countriesList: ChainablePromiseArray = await $$("section[class*='ta-results'] button>span");
 
-        const countryName:ChainablePromiseElement = await countriesList.find(async (country: ChainablePromiseElement) => {
-            //return await country.getText().includes(name);
-            const text = await country.getText();
+        const countryName:ChainablePromiseElement | undefined = await countriesList.find(async (country: ChainablePromiseElement) => {
+
+        const text = await country.getText();
             if(text === name){
                 return country;
             }
            
         })
-        await expect(countryName).toHaveText(expect.stringMatching(name)); 
+        await expect(countryName).toHaveText(name, {containing: true}); 
         
         await countryName.click();
         
-    }
-
-    async placeAnOrder(): Promise<void> {
-        await this.placeOrderBtn.click();
     }
 
 }

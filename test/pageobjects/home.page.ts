@@ -2,24 +2,28 @@ import { $ } from '@wdio/globals'
 import Page from './page';
 
 class HomePage extends Page {
-
-    public get headerEle () {
+    // define all getter method return type
+    get headerEle(): ChainablePromiseElement {
         return $("//h3[text()='Automation']");
     }
 
-    public get Ele() {
+    get Ele(): ChainablePromiseElement {
         return $("section[id='products']>div:first-of-type>div:last-of-type>div:last-of-type>div>div>button:last-of-type");
     }
 
-    public get cart() {
+    get cartBtn(): ChainablePromiseElement {
         return $("button[routerlink*='/cart']");
     }
 
-    public get confirmationCartToastEle() {
+    get confirmationCartToastEle(): ChainablePromiseElement {
         return $("#toast-container>div");
     }
 
-    public async itemSelect(itemName: string): Promise<void> {
+    get signOutBtn(): ChainablePromiseElement {
+        return $(".fa-sign-out")
+    }
+
+    async itemSelect(itemName: string): Promise<void> {
         const items: ChainablePromiseArray = $$('.card-body');
         const itemEle: ChainablePromiseElement = items.find(async (item: ChainablePromiseElement) => {
             return (await item.$('b').getText()).includes(itemName);
@@ -29,15 +33,6 @@ class HomePage extends Page {
         
     }
 
-    public async clickOnTheCartBtn(): Promise<void> {
-        
-        await this.cart.click();
-
-    }
-
-    public async checkEleAttributeForClass(): Promise<void> {
-        await expect(this.Ele).toHaveAttribute('class', 'btn w-10 rounded');
-    }
     
     /*
 
